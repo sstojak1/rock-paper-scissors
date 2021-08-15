@@ -16,7 +16,8 @@ model.Player A always chooses Paper
 model.Player B chooses randomly  
 
 The game consists of 100 rounds of above two players competing.  
+
 The output of the program should be like the following:  
-"model.Player A wins 31 of 100 games"  
-"model.Player B wins 37 of 100 games"  
+"Player A wins 31 of 100 games"  
+"Player B wins 37 of 100 games"  
 "Tie: 32 of 100 games"
