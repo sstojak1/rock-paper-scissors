@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ShapeValueTest {
 
     @Test
-    void shouldReturnRandomShapeValue(){
+    void shouldReturnRandomShapeValue() {
         final var shapeValue = ShapeValue.randomShapeValue();
         final var allShapeValues = Arrays.asList(ShapeValue.values());
         assertThat(allShapeValues).contains(shapeValue);
