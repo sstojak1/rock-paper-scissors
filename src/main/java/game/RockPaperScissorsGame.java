@@ -1,5 +1,7 @@
 package game;
 
+import model.Player;
+
 public interface RockPaperScissorsGame {
-    void play();
+    Player play();
 }

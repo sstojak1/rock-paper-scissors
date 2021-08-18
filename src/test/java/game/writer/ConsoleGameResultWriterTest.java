@@ -14,7 +14,7 @@ class ConsoleGameResultWriterTest {
     void shouldPrintGameResult() {
         final var gameResult = new GameResult(1, 1, 0);
 
-        String expectedSystemOutput = "Player A wins 1 of 1 games\\s+" +
+        final var expectedSystemOutput = "Player A wins 1 of 1 games\\s+" +
                 "Player B wins 0 of 1 games\\s+" +
                 "Tie: 0 of 1 games\\s+";
 

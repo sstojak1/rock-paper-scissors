@@ -1,22 +1,17 @@
-import game.GameResult;
-import game.RockPaperScissorsGameImpl;
+import game.TwoPlayerRepeatableGame;
 import game.writer.ConsoleGameResultWriterImpl;
+import model.strategy.PaperStrategy;
 import model.Player;
-import model.ShapeValue;
+import model.strategy.RandomStrategy;
 
 public class RockPaperScissorsApplication {
 
     public static void main(String[] args) {
-        final int gamesToPlay = 100;
-        final var playerPaper = new Player(ShapeValue.PAPER);
-        final var playerB = new Player();
-        final var rockPaperScissorsGame = new RockPaperScissorsGameImpl(playerPaper, playerB);
+        final var playerA = new Player(new PaperStrategy());
+        final var playerB = new Player(new RandomStrategy());
+        final var twoPlayerRepeatableGame = new TwoPlayerRepeatableGame(playerA, playerB);
+        final var gameResult = twoPlayerRepeatableGame.play(100);
 
-        for (int game = 0; game < gamesToPlay; game++) {
-            playerB.setPlayerShape(ShapeValue.randomShapeValue());
-            rockPaperScissorsGame.play();
-        }
-        final var gameResult = new GameResult(gamesToPlay, playerPaper.getGamesWon(), playerB.getGamesWon());
         new ConsoleGameResultWriterImpl().write(gameResult);
     }
 }

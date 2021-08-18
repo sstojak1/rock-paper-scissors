@@ -1,19 +1,13 @@
 package model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import model.strategy.Strategy;
 
-@NoArgsConstructor
-@Data
+@AllArgsConstructor
 public class Player {
-    private int gamesWon;
-    private ShapeValue playerShape;
+    private final Strategy strategy;
 
-    public Player(final ShapeValue shapeValue) {
-        this.playerShape = shapeValue;
-    }
-
-    public void incrementGamesWon() {
-        gamesWon++;
+    public Shape chooseShape(){
+        return strategy.chooseShape();
     }
 }

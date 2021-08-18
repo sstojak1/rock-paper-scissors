@@ -1,70 +1,57 @@
 package game;
 
 import model.Player;
-import model.ShapeValue;
+import model.strategy.PaperStrategy;
+import model.strategy.RockStrategy;
+import model.strategy.ScissorsStrategy;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class RockPaperScissorsGameTest {
 
-    final Player playerA = new Player();
-    final Player playerB = new Player();
-    final RockPaperScissorsGame rockPaperScissorsGame = new RockPaperScissorsGameImpl(playerA, playerB);
-
     @Test
     void paperShouldBeatRock() {
-        playerA.setPlayerShape(ShapeValue.PAPER);
-        playerB.setPlayerShape(ShapeValue.ROCK);
+        final var playerA = new Player(new PaperStrategy());
+        final var playerB = new Player(new RockStrategy());
+        final var twoPlayerGame = new TwoPlayerGame(playerA, playerB);
 
-        final var expectedGameResult = new GameResult(1, 1, 0);
+        final var winner = twoPlayerGame.play();
 
-        rockPaperScissorsGame.play();
-
-        final var actualGameResult = new GameResult(1, playerA.getGamesWon(), playerB.getGamesWon());
-
-        assertEquals(expectedGameResult, actualGameResult);
+        assertEquals(playerA, winner);
     }
 
     @Test
     void rockShouldBeatScissors() {
-        playerA.setPlayerShape(ShapeValue.ROCK);
-        playerB.setPlayerShape(ShapeValue.SCISSORS);
+        final var playerA = new Player(new RockStrategy());
+        final var playerB = new Player(new ScissorsStrategy());
+        final var twoPlayerGame = new TwoPlayerGame(playerA, playerB);
 
-        final var expectedGameResult = new GameResult(1, 1, 0);
+        final var winner = twoPlayerGame.play();
 
-        rockPaperScissorsGame.play();
-
-        final var actualGameResult = new GameResult(1, playerA.getGamesWon(), playerB.getGamesWon());
-
-        assertEquals(expectedGameResult, actualGameResult);
+        assertEquals(playerA, winner);
     }
 
     @Test
     void scissorsShouldBeatPaper() {
-        playerA.setPlayerShape(ShapeValue.SCISSORS);
-        playerB.setPlayerShape(ShapeValue.PAPER);
+        final var playerA = new Player(new ScissorsStrategy());
+        final var playerB = new Player(new PaperStrategy());
+        final var twoPlayerGame = new TwoPlayerGame(playerA, playerB);
 
-        final var expectedGameResult = new GameResult(1, 1, 0);
+        final var winner = twoPlayerGame.play();
 
-        rockPaperScissorsGame.play();
-
-        final var actualGameResult = new GameResult(1, playerA.getGamesWon(), playerB.getGamesWon());
-
-        assertEquals(expectedGameResult, actualGameResult);
+        assertEquals(playerA, winner);
     }
 
     @Test
     void gameShouldBeTiedWhenPlayersChooseTheSameShape() {
-        playerA.setPlayerShape(ShapeValue.SCISSORS);
-        playerB.setPlayerShape(ShapeValue.SCISSORS);
+        final var playerA = new Player(new PaperStrategy());
+        final var playerB = new Player(new PaperStrategy());
+        final var twoPlayerGame = new TwoPlayerGame(playerA, playerB);
 
-        final var expectedGameResult = new GameResult(1, 0, 0);
+        final var winner = twoPlayerGame.play();
 
-        rockPaperScissorsGame.play();
-
-        final var actualGameResult = new GameResult(1, playerA.getGamesWon(), playerB.getGamesWon());
-
-        assertEquals(expectedGameResult, actualGameResult);
+        assertNull(winner);
     }
 }
